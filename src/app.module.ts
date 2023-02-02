@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
+import { AuthenticationModule } from './authentication/authentication.module';
 
 @Module({
   imports: [
@@ -10,6 +11,10 @@ import * as Joi from '@hapi/joi';
         MONGO_HOST: Joi.string().required(),
         MONGO_PORT: Joi.number().required(),
         MONGO_DATABASE: Joi.string().required(),
+        JWT_ACCESS_TOKEN_SECRET: Joi.string().required(),
+        JWT_ACCESS_TOKEN_EXPIRATION_TIME: Joi.string().required(),
+        JWT_REFRESH_TOKEN_SECRET: Joi.string().required(),
+        JWT_REFRESH_TOKEN_EXPIRATION_TIME: Joi.string().required(),
         PORT: Joi.number()
       })
     }),
@@ -26,7 +31,8 @@ import * as Joi from '@hapi/joi';
         };
       },
       inject: [ConfigService]
-    })
+    }),
+    AuthenticationModule
   ],
   controllers: [],
   providers: []
