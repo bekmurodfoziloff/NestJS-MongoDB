@@ -27,7 +27,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
         return {
           uri: `mongodb://${host}:${port}`,
           dbName: database,
-          useNewUrlParser: true
+          useNewUrlParser: true,
         };
       },
       inject: [ConfigService]
